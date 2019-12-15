@@ -1,0 +1,19 @@
+{
+    "partidos": {
+        "from": "partidos"
+    },
+
+    "membros_partidos": {
+        "from": "partidos.membros",
+        "where": {
+            "id": "{id}"
+        }
+    },
+    
+    "deputados": {
+        "from": "deputados",
+        "where": {
+            "id": "{id}"
+        }
+    }
+}
