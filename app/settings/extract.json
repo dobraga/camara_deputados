@@ -3,14 +3,18 @@
         "from": "partidos"
     },
 
-    "membros_partidos": {
+    "partidos_membros": {
+        "id": "partidos",
         "from": "partidos.membros",
         "where": {
-            "id": "{id}"
+            "id": "{id}",
+            "dataInicio": "{dataInicio}",
+            "dataFim": "{dataFim}"
         }
     },
     
     "deputados": {
+        "id": "partidos_membros",
         "from": "deputados",
         "where": {
             "id": "{id}"
