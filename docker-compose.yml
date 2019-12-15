@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+    app:
+        image: camaradeputados
+        volumes:
+            - camaradeputados_data:/var/lib/etl
+        links: 
+            - db
+            
+    db:
+        container_name: db
+        image: mysql:5.7
+        restart: always
+        ports:
+            - "3306:3306"
+        volumes:
+            - mysql_data:/var/lib/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: '123'
+            MYSQL_DATABASE: deputados
+
+    adminer:
+        image: phpmyadmin/phpmyadmin:latest
+        links:
+            - db
+        ports:
+            - 80:80
+        environment:
+            - PMA_ARBITRARY=1
+
+    metabase:
+        image: metabase/metabase:latest
+        links:
+            - db
+        ports:
+            - 3000:3000
+        volumes:
+            - metabase_data:/var/lib/metabase
+
+volumes:
+    camaradeputados_data:
+    mysql_data:
+    metabase_data:

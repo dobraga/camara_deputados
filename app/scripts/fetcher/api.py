@@ -98,14 +98,15 @@ class Api:
             req = requests.get(link)            
             dados = (req.json()['dados'])
 
-            if 'ultimoStatus' in dados.keys():
-                del dados['ultimoStatus']
-
             if isinstance(dados, list):
                 for line in dados:
+                    if 'ultimoStatus' in line.keys():
+                        del line['ultimoStatus']
                     json.dump(line, file, ensure_ascii=False)
                     file.write("\n")
 
             else:
+                if 'ultimoStatus' in dados.keys():
+                    del dados['ultimoStatus']
                 json.dump(dados, file, ensure_ascii=False)
                 file.write("\n")
