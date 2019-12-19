@@ -10,24 +10,32 @@ services:
             
     db:
         container_name: db
-        image: mysql:5.7
+        image: postgres:12.1
         restart: always
-        ports:
-            - "3306:3306"
-        volumes:
-            - mysql_data:/var/lib/mysql
         environment:
-            MYSQL_ROOT_PASSWORD: '123'
-            MYSQL_DATABASE: deputados
+            POSTGRES_PASSWORD: '123'
+            POSTGRES_DATABASE: deputados
+        ports:
+            - "15432:5432"
+        volumes:
+            - sql_data:/var/lib/sql
+        networks:
+            - postgres-compose-network
 
     adminer:
-        image: phpmyadmin/phpmyadmin:latest
+        image: dpage/pgadmin4
+        environment:
+            PGADMIN_DEFAULT_EMAIL: "douglasmartinsbraga@gmail.com"
+            PGADMIN_DEFAULT_PASSWORD: "123"
         links:
             - db
         ports:
-            - 80:80
-        environment:
-            - PMA_ARBITRARY=1
+            - "16543:80"
+        depends_on:
+            - db
+        networks:
+            - postgres-compose-network
+          
 
     metabase:
         image: metabase/metabase:latest
@@ -40,5 +48,9 @@ services:
 
 volumes:
     camaradeputados_data:
-    mysql_data:
+    sql_data:
     metabase_data:
+
+networks: 
+    postgres-compose-network:
+        driver: bridge
