@@ -1,23 +1,35 @@
 {
-    "partidos": {
-        "from": "partidos"
-    },
+    "API": {
+        "partidos": {
+            "from": "partidos",
+        },
 
-    "partidos_membros": {
-        "id": "partidos",
-        "from": "partidos.membros",
-        "where": {
-            "id": "{id}",
-            "dataInicio": "{dataInicio}",
-            "dataFim": "{dataFim}"
-        }
-    },
-    
-    "deputados": {
-        "id": "partidos_membros",
-        "from": "deputados",
-        "where": {
-            "id": "{id}"
+        "partidos_det": {
+            "table": true,
+            "from": "partidos",
+            "where": {
+                "id": "{id}"
+            },
+            "id": "partidos"
+        },
+
+        "partidos_membros": {
+            "from": "partidos.membros",
+            "where": {
+                "id": "{id}",
+                "dataInicio": "{dataInicio}",
+                "dataFim": "{dataFim}"
+            },
+            "id": "partidos"
+        },
+        
+        "deputados": {
+            "table": true,
+            "from": "deputados",
+            "where": {
+                "id": "{id}"
+            },
+            "id": "partidos_membros"
         }
     }
 }

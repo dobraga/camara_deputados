@@ -1,5 +1,0 @@
-membros_partidos.api:
-    - partidos.api
-
-partidos_deputados.api:
-    - membros_partidos.api
