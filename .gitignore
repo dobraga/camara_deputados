@@ -107,8 +107,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+.vscode
 # Extract files
-**/input
-**/logs
+**/input/*.jsonl
 
 # End of https://www.gitignore.io/api/python
