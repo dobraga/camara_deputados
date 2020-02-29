@@ -30,7 +30,7 @@ default_args = {
 def _print_context(**context):
     print(context)
 
-with DAG('ETL', default_args=default_args, description='Processo mensal para extração, carga e transformação', catchup=False) as dag:
+with DAG('ETLMonthly', default_args=default_args, description='Processo mensal para extração, carga e transformação', catchup=False) as dag:
     print_context = PythonOperator(
         task_id="print_context",
         python_callable=_print_context,
